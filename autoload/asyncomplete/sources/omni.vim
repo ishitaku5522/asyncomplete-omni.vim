@@ -24,6 +24,7 @@ function! asyncomplete#sources#omni#completor(opt, ctx) abort
     endif
     let l:base = l:typed[l:startcol : l:col]
     let l:matches = s:safe_omnifunc(0, l:base)
+    call map(l:matches, "extend(v:val, {'menu': '[omni]'})")
     call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol + 1, l:matches)
   catch
     call asyncomplete#log('omni', 'error', v:exception)
